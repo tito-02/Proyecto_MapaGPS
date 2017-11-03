@@ -32,10 +32,14 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         map =((SupportMapFragment)getSupportFragmentManager().findFragmentById(R.id.map)).getMapAsync(MapaActual);
-        map.setMapStyle(MAP_TYPE_SATELLITE);
+        map.setMapStyle(GoogleMap.MAP_TYPE_SATELLITE);
 
         Marker sanluis = map.addMarker(new MarkerOptions().position(SANLUIS).title("San Luis"));
         Marker ulp = map.addMarker(new MarkerOptions().position(ULP).title("Univerdidad de la punta").snippet("ULP La Mejor").icon(BitmapDescriptorFactory.fromResource(R.drawable.ULP)));
+
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(ULP,15));
+        map.animateCamera(CameraUpdateFactory.zoomTo(15),2000,null);
+
 
         GoogleMap mapa = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMapAsync(MapaActual);
 
