@@ -9,9 +9,16 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.util.UUID;
+
+import static com.google.android.gms.maps.GoogleMap.MAP_TYPE_SATELLITE;
 
 public class MainActivity extends FragmentActivity {
 
@@ -24,13 +31,19 @@ public class MainActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        map =((SupportMapFragment)getSupportFragmentManager().findFragmentById(R.id.map)).getMapAsync(MapaActual);
+        map.setMapStyle(MAP_TYPE_SATELLITE);
 
+        Marker sanluis = map.addMarker(new MarkerOptions().position(SANLUIS).title("San Luis"));
+        Marker ulp = map.addMarker(new MarkerOptions().position(ULP).title("Univerdidad de la punta").snippet("ULP La Mejor").icon(BitmapDescriptorFactory.fromResource(R.drawable.ULP)));
 
         GoogleMap mapa = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMapAsync(MapaActual);
 
     }
 
         private class MapaActual implements OnMapReadyCallback {
+
+
             @Override
             public void onMapReady(GoogleMap mapa) {
                 map = mapa;
@@ -39,6 +52,7 @@ public class MainActivity extends FragmentActivity {
                 map.animateCamera(camUpICT);
                 mapa.addMarker(new MarkerOptions().position(SANLUIS)).setTitle("San Luis");
                 mapa.addMarker(new MarkerOptions().position(ULP)).setTitle("ULP");
+
 
             }
         }
